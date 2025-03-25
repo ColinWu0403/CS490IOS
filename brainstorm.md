@@ -1,5 +1,10 @@
 # Brainstorm Ideas
 
+## Existing Apps
+- Brightspace
+
+
+## App ideas
 - March Madness Sports Stats App
 - Quiz App with timer
 - Proximity based chat
