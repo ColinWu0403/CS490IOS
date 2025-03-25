@@ -2,7 +2,8 @@
 
 ## Existing Apps
 - Brightspace
-
+- Beli
+- 
 
 ## App ideas
 - March Madness Sports Stats App
@@ -11,3 +12,5 @@
 - Food ranking app (Dining Courts, Local places)
 - Brightspace but better (pulls d2l api, tracks assignments)
 - Letterboxd but better
+
+https://docs.valence.desire2learn.com/reference.html
