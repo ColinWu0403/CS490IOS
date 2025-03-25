@@ -1,10 +1,13 @@
 # Brainstorm Ideas
 
 ## Existing Apps
-- Brightspace
 
+- Brightspace
+- Beli
+-
 
 ## App ideas
+
 - March Madness Sports Stats App
 - Quiz App with timer
 - Proximity based chat
@@ -12,5 +15,5 @@
 - Brightspace but better (pulls d2l api, tracks assignments)
 - Letterboxd but better
 
-
 https://hackmd.io/x51INeBPSHac4rEtuUmHwA?both
+https://docs.valence.desire2learn.com/reference.html
