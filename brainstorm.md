@@ -11,3 +11,6 @@
 - Food ranking app (Dining Courts, Local places)
 - Brightspace but better (pulls d2l api, tracks assignments)
 - Letterboxd but better
+
+
+https://hackmd.io/x51INeBPSHac4rEtuUmHwA?both
