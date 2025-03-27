@@ -38,10 +38,12 @@ Designed with simplicity and usability in mind, the app eliminates the clutter a
 * Ability to view all class assignments
 * Ability to view a calendar with all class information 
 * Ability to view class grades and statistics
-
+* Ability to click on an assignment, then view more information regarding its content, due date, etc.
+  
 **Optional Nice-to-have Stories**
 
-* Ability to "check off" completed assignments 
+* Ability to "check off" completed assignments
+* Ability to sort through assignments based on: Course, Due Date, Type
 
 ### 2. Screen Archetypes
 
