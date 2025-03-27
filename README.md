@@ -35,8 +35,10 @@ Designed with simplicity and usability in mind, the app eliminates the clutter a
 
 **Required Must-have Stories**
 
-* Ability to view all class assignments
-* Ability to view a calendar with all class information 
+* Ability to view personalized content based on current enrollment
+* Ability to navigate between screens using a Navigation Bar
+* Ability to view all class assignments in a unified feed
+* Ability to view a calendar with all class information
 * Ability to view class grades and statistics
 * Ability to click on an assignment, then view more information regarding its content, due date, etc.
   
