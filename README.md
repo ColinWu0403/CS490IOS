@@ -1,7 +1,4 @@
-CS490IOS Capstone Project
 ===
-
-# BrighterSpace
 
 ## Table of Contents
 
@@ -12,22 +9,23 @@ CS490IOS Capstone Project
 
 ## Overview
 
-This app reimagines Brightspace D2L with a modern, intuitive design to simplify course management for students at Purdue. It consolidates assignments, calendars, course materials, and notifications for all classes into a streamlined interface for each semester, making academic life more organized and efficient.
+[App] is a food-ranking platform that helps users explore new dining options and document their experiences. It consolidates restaurant data from the user’s local area, allowing them to write reviews, upload photos, and rate their meals. The app offers a personalized experience, where users can revisit their reviews and discover highly rated options nearby, making it a go-to solution for food lovers seeking convenience and variety.
+
 
 ### Description
 
-BrighterSpace serves as a centralized tool for managing all aspects of university courses in one place. Key features include an integrated assignments list with due date reminders, a customizable calendar that consolidates all course-related events, and easy access to lecture materials and resources. A grades dashboard provides an at-a-glance view of performance, while real-time notifications keep students updated on announcements and deadlines.
+The app is designed to simplify the dining experience by combining restaurant discovery and food review features in one place. Users can explore local restaurants near them and add their own reviews. By enabling users to upload photos and provide detailed feedback, the app creates a personal list of dining experiences that can be shared with others.
 
-Designed with simplicity and usability in mind, the app eliminates the clutter and inefficiencies of the original Brightspace platform. Its clean interface, intuitive navigation, and customizable widgets empower students to stay organized, focus on their studies, and succeed academically.
+Beyond discovery, the app functions as a personal food diary. Users can revisit their profiles to see past reviews and photos, helping them remember their favorite restaurants and meals. The app’s intuitive interface, combined with real-time location-based restaurant recommendations, ensures that users can quickly decide where to eat. Whether it’s for trying new cuisines or revisiting old favorites, this app makes dining out an enjoyable and organized experience.
 
 ### App Evaluation
 
-- **Category:** Education
-- **Mobile:** This app is useful on mobile because it allows students to quickly access their work for the day/week, and to check their assignments and grades on the go. Brightspace pulse already does this, but is slow to pull information and does not organize it in a mobile-friendly manner.
-- **Story:** Brightspace 
-- **Market:** Anybody that is enrolled in classes through D2L Brightspace. This includes all Purdue students. 
-- **Habit:** Students would use this pretty much anytime they look at lectures, complete assignments, or check their grades. 
-- **Scope:** This app would pull from all class content data, assignment data, and grade data from all the classes the user is enrolled in the current semester, and would put it all together in a user-friendly dashboard that tracks all relevant assignment and grade information in one place.
+- **Category:** Food
+- **Mobile:** This app is useful on mobile because it provides a consolidated place for users to view all restaurants in their area, as well as write and view past reviews for the restaurants they have eaten at.
+- **Story:** Allows users to try new food establishments and document their experiences for future reference. 
+- **Market:** Anyone that eats out at restaurants would find this application useful. The ability to view restaurants in the users' area make it useful for anyone looking to try a new restaurant near them. The ability to write reviews and view them on a user's profile make the app useful for anyone looking to revisit an old restaurant that they rated highly.
+- **Habit:** Users will check this application any time they are looking to eat food outside, which is frequent for most people. 
+- **Scope:** This app will pull from all restaurants near a user, as well as any restaurants a user has manually add them. Then, it will display this data in a consolidated interface.
 
 ## Product Spec
 
@@ -35,52 +33,72 @@ Designed with simplicity and usability in mind, the app eliminates the clutter a
 
 **Required Must-have Stories**
 
-* Ability to view personalized content based on current enrollment
-* Ability to navigate between screens using a Navigation Bar
-* Ability to view all class assignments in a unified feed
-* Ability to view a calendar with all class information
-* Ability to view class grades and statistics
-* Ability to click on an assignment, then view more information regarding its content, due date, etc.
-  
+* Ability to view restaurants near them and write reviews for those restaurants.
+* Ability to add unreviewed restaurants to the app or to add reviews to restaurants they haven't been to before. 
+* Ability to look at recommendations for restaurants near them based on distance and prior reviews.
+
 **Optional Nice-to-have Stories**
 
-* Ability to "check off" completed assignments
-* Ability to sort through assignments based on: Course, Due Date, Type
+* Ability to log in as different users.
+
 
 ### 2. Screen Archetypes
 
-- [ ] Login screen
-* Allows user to login to their BrightSpace account and link it to BrighterSpace.
-
 - [ ] Stream
-* 
-* User can look at what classes they're enrolled in.
+* User can log a review for a new restaurant.
+* User can look at restaurants near them that match their preferences.
+* User can scroll through their account and previous reviews or visited restaurants. 
+
+- [ ] Search
+* User can search for restaurants near them.
+
+- [ ] Detail
+* User can look at a restaurant's details.
+* User can look at a review of a restaurant.
+* User can look at their account details (username, number of reviews, preferences, etc.)
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* [fill out your first tab]
-* [fill out your second tab]
-* [fill out your third tab]
+* Restaurants List
+* Add Review
+* My Profile
 
 **Flow Navigation** (Screen to Screen)
 
-- [ ] [list first screen here]
-* [list screen navigation here]
-* ...
-- [ ] [list second screen here]
-* [list screen navigation here]
-* ...
+- Stream
+    -> Navigate restaurants near you
+    -> Add review
+    -> Check profile
+- Navigate restaurants near you
+    -> Detail page for individual restaurant with info and reviews
+- Add review
+    -> Confirm review
+    
+
 
 ## Wireframes
 
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+
+![Wireframe](https://hackmd.io/_uploads/rycKuBXp1l.png)
 
 ## Schema 
 
-[This section will be completed in Unit 9]
+User
+- ID
+- Name
+- Photo
+- Review[]
+
+Review
+- ID
+- Restaurant_name
+- Cuisine
+- Location
+- Score
+- Review Text
+- Photo
 
 ### Models
 
