@@ -17,12 +17,12 @@ class ViewController: UIViewController {
         
         // Create a test review instance
         let testReview = Review(
-            restaurantName: "Test Restaurant",
-            cuisine: "Italian",
-            location: "123 Test Street",
-            score: 4.5,
-            reviewText: "Great food and service!",
-            photoURL: "http://example.com/photo.jpg"
+            restaurantName: "Hillenbrand Dining Court",
+            cuisine: "Mid food",
+            location: "West Lafayette, IN",
+            score: 2.3,
+            reviewText: "I got food poisoninig there once",
+            photoURL: "https://en.wikipedia.org/wiki/File:Image_created_with_a_mobile_phone.png"
         )
         
         // Call the addReview function with the test review
