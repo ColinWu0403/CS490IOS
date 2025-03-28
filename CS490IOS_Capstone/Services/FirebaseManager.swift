@@ -15,7 +15,10 @@ class FirebaseManager {
     let firestore = Firestore.firestore()
     let storage = Storage.storage()
 
-    private init() {}
+    private init() {
+        let apiKey = ProcessInfo.processInfo.environment["GOOGLE_API_KEY"]
+        print("API Key: \(apiKey ?? "not set")")
+    }
 
     func uploadImage(_ image: UIImage, completion: @escaping (String?) -> Void) {
         let imageID = UUID().uuidString
