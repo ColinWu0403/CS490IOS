@@ -7,12 +7,28 @@
 
 import UIKit
 import Firebase
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        
+        // Fetch the API key from environment variable
+        if let apiKey = ProcessInfo.processInfo.environment["GOOGLE_API_KEY"] {
+            // Create FirebaseOptions with the API key
+            let options = FirebaseOptions(googleAppID: "1:317179960404:ios:39aa7a74699e92cc1321c1", gcmSenderID: "317179960404")
+            options.apiKey = apiKey
+            options.projectID = "cs490ios"
+            
+            // Configure Firebase with the options
+            FirebaseApp.configure(options: options)
+        } else {
+            print("Error: API key is missing.")
+        }
+        
         return true
     }
 

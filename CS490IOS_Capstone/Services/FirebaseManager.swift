@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import FirebaseStorage
 import FirebaseFirestore
+import Firebase
 
 class FirebaseManager {
     static let shared = FirebaseManager()
@@ -16,8 +17,6 @@ class FirebaseManager {
     let storage = Storage.storage()
 
     private init() {
-        let apiKey = ProcessInfo.processInfo.environment["GOOGLE_API_KEY"]
-        print("API Key: \(apiKey ?? "not set")")
     }
 
     func uploadImage(_ image: UIImage, completion: @escaping (String?) -> Void) {
