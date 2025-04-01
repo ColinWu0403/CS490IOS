@@ -11,13 +11,13 @@
         <!--Profile-->
         <scene sceneID="Gm6-Lf-ff8">
             <objects>
-                <viewController storyboardIdentifier="ProfileVC" id="t5P-V5-wau" customClass="ProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVC" id="t5P-V5-wau" customClass="ProfileViewController" customModule="CS490IOS_Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O4i-si-AWA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndC-mc-p7R">
-                                <rect key="frame" x="175" y="277" width="42" height="21"/>
+                                <rect key="frame" x="175" y="298" width="42" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -32,19 +32,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle" catalog="system" id="yWa-k1-t9T"/>
-                    <connections>
-                        <outlet property="profilePicture" destination="u8l-NV-fIK" id="t80-YK-kDX"/>
-                        <outlet property="usernameLabel" destination="ndC-mc-p7R" id="9kP-Ep-x3B"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovQ-Ik-aLt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2397" y="725"/>
+            <point key="canvasLocation" x="-2397.709923664122" y="724.64788732394368"/>
         </scene>
         <!--New-->
         <scene sceneID="dDm-7A-SMW">
             <objects>
-                <viewController storyboardIdentifier="AddReviewVC" id="uve-28-mEQ" customClass="AddReviewViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddReviewVC" id="uve-28-mEQ" customClass="AddReviewViewController" customModule="CS490IOS_Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HEr-yx-dil">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,7 +56,7 @@
         <!--List-->
         <scene sceneID="9pv-AG-O94">
             <objects>
-                <viewController storyboardIdentifier="ListVC" id="Yta-i5-hvX" customClass="ListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListVC" id="Yta-i5-hvX" customClass="ListViewController" customModule="CS490IOS_Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SGf-8f-a0V">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
