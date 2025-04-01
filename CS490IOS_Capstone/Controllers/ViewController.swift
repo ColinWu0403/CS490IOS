@@ -7,26 +7,31 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseStorage
 
 class ViewController: UIViewController {
 
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
+        printReviews()
+        print("Aasjkafjhgakhgklsadhgkjadj aljkgsghakgklafdkgkjads")
         super.viewDidLoad()
         
-        // Create a test review instance
-        let testReview = Review(
-            restaurantName: "Hillenbrand Dining Court",
-            cuisine: "Mid food",
-            location: "West Lafayette, IN",
-            score: 2.3,
-            reviewText: "I got food poisoninig there once",
-            photoURL: "https://en.wikipedia.org/wiki/File:Image_created_with_a_mobile_phone.png"
-        )
+
         
-        // Call the addReview function with the test review
-        addReview(testReview)
+        // Create a test review instance
+//        let testReview = Review(
+//            restaurantName: "Hillenbrand Dining Court",
+//            cuisine: "Mid food",
+//            location: "West Lafayette, IN",
+//            score: 2.3,
+//            reviewText: "I got food poisoninig there once",
+//            photoURL: "https://en.wikipedia.org/wiki/File:Image_created_with_a_mobile_phone.png"
+//        )
+//        
+//        // Call the addReview function with the test review
+//        addReview(testReview)
     }
 
     
@@ -48,6 +53,30 @@ class ViewController: UIViewController {
         }
     }
 
+    func printReviews() {
+        // Fetch the Reviews collection and print the contents
+        db.collection("Reviews").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+            
+            for document in snapshot!.documents {
+                do {
+                    let data = document.data()
+                    let review = try Firestore.Decoder().decode(Review.self, from: data)
+                    print("Restaurant Name: \(review.restaurantName)")
+                    print("Cuisine: \(review.cuisine)")
+                    print("Location: \(review.location)")
+                    print("Score: \(review.score)")
+                    print("Review Text: \(review.reviewText)")
+                    print("Photo URL: \(review.photoURL)")
+                } catch {
+                    print("Error decoding document: \(error)")
+                }
+            }
+        }
+    }
 
 }
 
