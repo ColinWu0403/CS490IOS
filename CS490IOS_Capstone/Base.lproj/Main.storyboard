@@ -106,7 +106,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="107"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoQ-kj-M1X">
-                                        <rect key="frame" x="142" y="56" width="115" height="43"/>
+                                        <rect key="frame" x="121" y="50" width="151" height="43"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="qoQ-kj-M1X" secondAttribute="height" multiplier="151:43" id="twJ-nK-aic"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -114,21 +117,55 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="qoQ-kj-M1X" firstAttribute="bottom" secondItem="Zdy-Sx-ROa" secondAttribute="bottomMargin" id="hxY-Zf-fjG"/>
-                                    <constraint firstItem="qoQ-kj-M1X" firstAttribute="leading" secondItem="Zdy-Sx-ROa" secondAttribute="leading" constant="142" id="mhp-v2-1Si"/>
+                                    <constraint firstItem="qoQ-kj-M1X" firstAttribute="bottom" secondItem="Zdy-Sx-ROa" secondAttribute="bottomMargin" constant="-6" id="hxY-Zf-fjG"/>
+                                    <constraint firstItem="qoQ-kj-M1X" firstAttribute="centerX" secondItem="Zdy-Sx-ROa" secondAttribute="centerX" id="iv9-jp-qXj"/>
+                                    <constraint firstItem="qoQ-kj-M1X" firstAttribute="top" secondItem="Zdy-Sx-ROa" secondAttribute="top" constant="50" id="izn-eg-S4w"/>
+                                    <constraint firstItem="qoQ-kj-M1X" firstAttribute="leading" secondItem="Zdy-Sx-ROa" secondAttribute="leading" constant="121" id="mhp-v2-1Si"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxs-8u-jBc">
+                                <rect key="frame" x="-4" y="115" width="401" height="142"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Current Location" translatesAutoresizingMaskIntoConstraints="NO" id="rv7-t1-Pjp">
+                                        <rect key="frame" x="8" y="78" width="385" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="uve-28-mEQ" id="xky-Bw-FLe"/>
+                                        </connections>
+                                    </searchBar>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search Restaurant" translatesAutoresizingMaskIntoConstraints="NO" id="Vbw-N2-ejo">
+                                        <rect key="frame" x="8" y="20" width="385" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="uve-28-mEQ" id="Gey-pY-xMV"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lLF-nE-ssf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zxs-8u-jBc" firstAttribute="centerX" secondItem="Zdy-Sx-ROa" secondAttribute="centerX" id="5mx-AA-zrU"/>
                             <constraint firstItem="lLF-nE-ssf" firstAttribute="bottom" secondItem="Zdy-Sx-ROa" secondAttribute="bottom" constant="662" id="GLq-no-1bR"/>
+                            <constraint firstItem="lLF-nE-ssf" firstAttribute="bottom" secondItem="zxs-8u-jBc" secondAttribute="bottom" constant="512" id="KDO-Yg-Oay"/>
                             <constraint firstAttribute="trailing" secondItem="Zdy-Sx-ROa" secondAttribute="trailing" id="MI0-Pf-dLV"/>
                             <constraint firstItem="Zdy-Sx-ROa" firstAttribute="top" secondItem="HEr-yx-dil" secondAttribute="top" id="NdZ-lM-fRG"/>
+                            <constraint firstItem="zxs-8u-jBc" firstAttribute="top" secondItem="lLF-nE-ssf" secondAttribute="top" constant="56" id="b0Z-Oa-Es8"/>
+                            <constraint firstItem="zxs-8u-jBc" firstAttribute="leading" secondItem="HEr-yx-dil" secondAttribute="leadingMargin" constant="-20" id="f5i-Pv-4jB"/>
                             <constraint firstItem="Zdy-Sx-ROa" firstAttribute="leading" secondItem="HEr-yx-dil" secondAttribute="leading" id="tXl-lF-UD4"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="New" image="plus.circle" catalog="system" id="C6t-As-g4r"/>
+                    <tabBarItem key="tabBarItem" title="New" image="plus.circle" catalog="system" id="C6t-As-g4r">
+                        <color key="badgeColor" red="0.0" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="locationSearchBar" destination="rv7-t1-Pjp" id="kcj-3L-Vo4"/>
+                        <outlet property="restaurantSearchBar" destination="Vbw-N2-ejo" id="uIA-FM-f9b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qx-dn-8J2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -158,6 +195,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Yta-i5-hvX" kind="relationship" relationship="viewControllers" id="6vI-cC-2oO"/>
