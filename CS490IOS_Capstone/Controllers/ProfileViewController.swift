@@ -14,24 +14,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let db = Firestore.firestore()
     let storage = Storage.storage()
     
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Style the profile image view
-        profileImage.layer.borderWidth = 2
+        profileImage.layer.borderWidth = 1
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.clipsToBounds = true
         
+        username.textAlignment = .center
+        username.numberOfLines = 1
+        username.adjustsFontSizeToFitWidth = true
+        username.minimumScaleFactor = 0.5
+
         // Add tap gesture recognizer programmatically
         profileImage.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(promptForImageTapped(_:)))
         profileImage.addGestureRecognizer(tapGesture)
         
-        fetchProfileImage()
+        fetchUserProfile()
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,17 +113,28 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
 
-    func fetchProfileImage() {
+    func fetchUserProfile() {
         let userId = "test"
 
         db.collection("Users").document(userId).getDocument { document, error in
             if let error = error {
-                print("Error fetching profile image: \(error.localizedDescription)")
+                print("Error fetching user profile: \(error.localizedDescription)")
                 return
             }
-            
-            if let imageURL = document?.data()?["profileImageURL"] as? String {
-                self.loadImage(from: imageURL)
+
+            guard let document = document, document.exists, let data = document.data() else {
+                print("User document does not exist")
+                return
+            }
+
+            let name = data["name"] as? String ?? "No Name"
+            let username = "@" + (data["username"] as? String ?? "unknown_user")
+            let profileImageURL = data["profileImageURL"] as? String ?? ""
+
+            DispatchQueue.main.async {
+                self.name.text = name
+                self.username.text = username
+                self.loadImage(from: profileImageURL)
             }
         }
     }
