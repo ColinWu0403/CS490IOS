@@ -6,24 +6,43 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseStorage
 
 class ListViewController: UIViewController {
+
+    let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // print Reviews table for now
+        printReviews()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func printReviews() {
+        // Fetch the Reviews collection and print the contents
+        db.collection("Reviews").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+            
+            for document in snapshot!.documents {
+                do {
+                    let data = document.data()
+                    let review = try Firestore.Decoder().decode(Review.self, from: data)
+                    print("Restaurant Name: \(review.restaurantName)")
+                    print("Cuisine: \(review.cuisine)")
+                    print("Location: \(review.location)")
+                    print("Score: \(review.score)")
+                    print("Review Text: \(review.reviewText)")
+                    print("Photo URL: \(review.photoURL)")
+                } catch {
+                    print("Error decoding document: \(error)")
+                }
+            }
+        }
     }
-    */
-
 }
