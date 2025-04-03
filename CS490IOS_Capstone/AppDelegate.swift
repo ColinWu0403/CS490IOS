@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let options = FirebaseOptions(googleAppID: "1:317179960404:ios:39aa7a74699e92cc1321c1", gcmSenderID: "317179960404")
             options.apiKey = apiKey
             options.projectID = "cs490ios"
+            options.storageBucket = "cs490ios.firebasestorage.app"
             
             // Configure Firebase with the options
             FirebaseApp.configure(options: options)
