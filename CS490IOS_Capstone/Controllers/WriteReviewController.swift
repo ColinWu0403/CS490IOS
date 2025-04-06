@@ -58,6 +58,32 @@ class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePicker
         reviewTextView.layer.cornerRadius = 8.0
         reviewTextView.clipsToBounds = true
         
+        // Button Styling
+        uploadButton.layer.cornerRadius = 8
+
+        uploadButton.backgroundColor = UIColor.systemGreen
+        uploadButton.setTitleColor(.white, for: .normal)
+        uploadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        uploadButton.layer.shadowColor = UIColor.black.cgColor
+        uploadButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        uploadButton.layer.shadowRadius = 4
+        uploadButton.layer.shadowOpacity = 0.2
+        uploadButton.clipsToBounds = false  // Important to allow shadow to show
+
+
+        submitReviewButton.layer.cornerRadius = 8
+
+        submitReviewButton.backgroundColor = UIColor.systemGreen
+        submitReviewButton.setTitleColor(.white, for: .normal)
+        submitReviewButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        submitReviewButton.layer.shadowColor = UIColor.black.cgColor
+        submitReviewButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        submitReviewButton.layer.shadowRadius = 4
+        submitReviewButton.layer.shadowOpacity = 0.2
+        submitReviewButton.clipsToBounds = false  // Important to allow shadow to show
+
         // Submit button becomes available after fields have been completed
         submitReviewButton.isHidden = true
     }
