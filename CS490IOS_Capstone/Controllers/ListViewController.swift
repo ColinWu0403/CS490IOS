@@ -11,10 +11,10 @@ import FirebaseStorage
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    // MARK: Outlets
+    // Outlets
     @IBOutlet weak var reviewTableView: UITableView!
     
-    // MARK: Properties/Variables/
+    // Properties/Variables
     var reviews: [Review] = []
     
     let db = Firestore.firestore()
@@ -93,6 +93,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
         let review = reviews[indexPath.row]
             
+        // Populate cell fields
         cell.restaurantNameLabel.text = review.restaurantName
         cell.cuisineLabel.text = review.cuisine
         cell.locationLabel.text = review.location

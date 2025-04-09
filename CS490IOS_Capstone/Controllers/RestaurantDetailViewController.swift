@@ -8,6 +8,8 @@
 import UIKit
 
 class RestaurantDetailViewController: UIViewController {
+    
+    // Outlets
 
     @IBOutlet weak var personalReview: UILabel!
     @IBOutlet weak var scoreLabel: UIStackView!
@@ -16,16 +18,16 @@ class RestaurantDetailViewController: UIViewController {
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var restaurantImageView: UIImageView!
     
-    // Incoming review
+    // Selected review from ListViewController
     var review: Review?
       
     override func viewDidLoad() {
         super.viewDidLoad()
-          
-        // Do any additional setup after loading the view.
         setupUI()
     }
-      
+    
+    // Function to fill stars based on review - currently only handles integer value
+    // If needed - I can add semi filling for stars
     func updateStars(for rating: Double) {
         let fullStar = UIImage(systemName: "star.fill")
         let emptyStar = UIImage(systemName: "star")
@@ -42,7 +44,7 @@ class RestaurantDetailViewController: UIViewController {
     }
       
     func setupUI() {
-        // Clear all fields immediately
+        // Clear all fields - may delete this
         restaurantNameLabel.text = ""
         cuisineLabel.text = ""
         locationLabel.text = ""
@@ -55,8 +57,8 @@ class RestaurantDetailViewController: UIViewController {
         // Populate fields with review data
         restaurantNameLabel.text = review.restaurantName
         cuisineLabel.text = review.cuisine
-        locationLabel.text = "X Miles Away" // Replace with real distance later
-        personalReview.text = review.reviewText
+        locationLabel.text = "X Miles Away" // TODO: Replace with real distance later
+        personalReview.text = review.reviewText // TODO: Replace with carousel of real reviews later
           
         updateStars(for: review.score)
           
