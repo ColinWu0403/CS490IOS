@@ -43,7 +43,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Controllers/RestaurantTableViewCell.swift,
-				Models/Restaurant.swift,
 			);
 			target = 0D3C14AA2D971E6A00E40603 /* AppTests */;
 		};
