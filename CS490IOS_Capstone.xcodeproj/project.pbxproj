@@ -14,8 +14,6 @@
 		0D3C149D2D9719F400E40603 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0D3C149C2D9719F400E40603 /* FirebaseDatabase */; };
 		0D3C149F2D9719F400E40603 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D3C149E2D9719F400E40603 /* FirebaseFirestore */; };
 		0D3C14A12D9719F400E40603 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D3C14A02D9719F400E40603 /* FirebaseStorage */; };
-		383901282DA01E560099D447 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383901272DA01E560099D447 /* Restaurant.swift */; };
-		383901292DA01E560099D447 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383901272DA01E560099D447 /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +29,6 @@
 /* Begin PBXFileReference section */
 		0D0977D42D934BAD008D67F8 /* CS490IOS_Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS490IOS_Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D3C14AB2D971E6A00E40603 /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		383901272DA01E560099D447 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -46,6 +43,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Controllers/RestaurantTableViewCell.swift,
+				Models/Restaurant.swift,
 			);
 			target = 0D3C14AA2D971E6A00E40603 /* AppTests */;
 		};
@@ -96,7 +94,6 @@
 		0D0977CB2D934BAD008D67F8 = {
 			isa = PBXGroup;
 			children = (
-				383901272DA01E560099D447 /* Restaurant.swift */,
 				0D0977D62D934BAD008D67F8 /* CS490IOS_Capstone */,
 				0D3C14AC2D971E6A00E40603 /* AppTests */,
 				0D0977D52D934BAD008D67F8 /* Products */,
@@ -231,7 +228,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				383901282DA01E560099D447 /* Restaurant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +235,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				383901292DA01E560099D447 /* Restaurant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

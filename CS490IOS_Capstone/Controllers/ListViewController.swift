@@ -17,7 +17,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
 
         // print Reviews table for now
-        printReviews()
+//        printReviews()
     }
     
 

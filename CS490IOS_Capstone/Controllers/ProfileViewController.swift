@@ -9,15 +9,24 @@ import UIKit
 import FirebaseFirestore
 import FirebaseStorage
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     let db = Firestore.firestore()
     let storage = Storage.storage()
     
+    @IBOutlet weak var reviewTableView: UITableView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var reviewImage: UIImageView!
+    @IBOutlet weak var reviewText: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var restaurantName: UILabel!
+    @IBOutlet weak var reviewScore: UILabel!
+    
+    var reviews: [Review] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +47,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(promptForImageTapped(_:)))
         profileImage.addGestureRecognizer(tapGesture)
         
+        reviewTableView.delegate = self
+        reviewTableView.dataSource = self
+        
         fetchUserProfile()
+        fetchReviews()
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,4 +163,62 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviews.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileReviewCell", for: indexPath) as? ProfileReviewTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let review = reviews[indexPath.row]
+        cell.restaurantName.text = review.restaurantName
+        cell.scoreText.text = String(review.score)
+        cell.reviewText.text = review.reviewText
+        cell.location.text = review.location
+        
+        // Load image asynchronously (use SDWebImage or similar for caching)
+        if let url = URL(string: review.photoURL) {
+            // Example with native approach:
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.reviewImage.image = image
+                    }
+                }
+            }
+        }
+        
+        return cell
+    }
+    
+    func fetchReviews() {
+        db.collection("Reviews").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching reviews: \(error)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else { return }
+            
+            var fetchedReviews = [Review]()
+            
+            for doc in documents {
+                do {
+                    let review = try doc.data(as: Review.self)
+                    fetchedReviews.append(review)
+                } catch {
+                    print("Error decoding review: \(error)")
+                }
+            }
+            
+            self.reviews = fetchedReviews
+            DispatchQueue.main.async {
+                self.reviewTableView.reloadData()
+            }
+        }
+    }
+
 }

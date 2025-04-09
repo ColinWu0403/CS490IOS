@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 
 class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    // Properties/Variables
+    // MARK: Properties/Variables
     
     var restaurant: Restaurant?
     var currentRating: Int = 0
-    
     var isRatingSelected = false
     var isTextEntered = false
     var isPhotoSelected = false
     
-    // Outlets
+    // MARK: Outlets
     
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
@@ -28,6 +30,10 @@ class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePicker
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var submitReviewButton: UIButton!
     
+    // MARK: Firestore and Storage references
+    
+    let db = Firestore.firestore()
+    let storage = Storage.storage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +58,32 @@ class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePicker
         reviewTextView.layer.cornerRadius = 8.0
         reviewTextView.clipsToBounds = true
         
+        // Button Styling
+        uploadButton.layer.cornerRadius = 8
+
+        uploadButton.backgroundColor = UIColor.systemGreen
+        uploadButton.setTitleColor(.white, for: .normal)
+        uploadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        uploadButton.layer.shadowColor = UIColor.black.cgColor
+        uploadButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        uploadButton.layer.shadowRadius = 4
+        uploadButton.layer.shadowOpacity = 0.2
+        uploadButton.clipsToBounds = false  // Important to allow shadow to show
+
+
+        submitReviewButton.layer.cornerRadius = 8
+
+        submitReviewButton.backgroundColor = UIColor.systemGreen
+        submitReviewButton.setTitleColor(.white, for: .normal)
+        submitReviewButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        submitReviewButton.layer.shadowColor = UIColor.black.cgColor
+        submitReviewButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        submitReviewButton.layer.shadowRadius = 4
+        submitReviewButton.layer.shadowOpacity = 0.2
+        submitReviewButton.clipsToBounds = false  // Important to allow shadow to show
+
         // Submit button becomes available after fields have been completed
         submitReviewButton.isHidden = true
     }
@@ -100,11 +132,19 @@ class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePicker
         print("Photo Selected: \(photoSelected ? "Yes" : "No")")
         print("----------------------------")
         
-        dismiss(animated: true, completion: nil)
+        // If a photo is selected, upload it then create the review;
+        // otherwise, create the review immediately.
+        if photoSelected, let image = selectedImage.image {
+            uploadImageForReview(image: image) { [weak self] photoURL in
+                self?.createReview(photoURL: photoURL)
+            }
+        } else {
+            createReview(photoURL: "")
+        }
     }
     
     
-    // Helper functions
+    // MARK: Helper functions
     
     // Updates fill of the stars based on which star has been clicked
     func updateStarSelection(rating: Int) {
@@ -123,7 +163,6 @@ class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePicker
         }
     }
     
-
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -169,5 +208,80 @@ class WriteReviewController: UIViewController, UITextViewDelegate, UIImagePicker
         checkIfReadyToSubmit()
     }
     
-
+    // MARK: - Review Submission Methods
+    
+    // Upload the selected image to Firebase Storage and return the download URL via a completion handler.
+    func uploadImageForReview(image: UIImage, completion: @escaping (String) -> Void) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            completion("")
+            return
+        }
+        
+        // Create a unique identifier for the review image
+        let reviewID = UUID().uuidString
+        let storageRef = storage.reference().child("reviews/\(reviewID).jpg")
+        
+        storageRef.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                print("Error uploading image: \(error.localizedDescription)")
+                completion("")
+                return
+            }
+            
+            storageRef.downloadURL { url, error in
+                if let error = error {
+                    print("Error getting download URL: \(error.localizedDescription)")
+                    completion("")
+                    return
+                }
+                
+                guard let photoURL = url?.absoluteString else {
+                    completion("")
+                    return
+                }
+                completion(photoURL)
+            }
+        }
+    }
+    
+    // Create the review object and add it to Firestore.
+    func createReview(photoURL: String) {
+        guard let restaurant = restaurant else { return }
+        
+        let review = Review(
+            restaurantName: restaurant.name,
+            cuisine: restaurant.cuisine ?? "Unknown Cuisine",
+            location: restaurant.location,
+            score: Double(currentRating),
+            reviewText: reviewTextView.text,
+            photoURL: photoURL
+        )
+        
+        addReview(review)
+        print("Review created sucessfully")
+    }
+    
+    // Add the review data to Firestore.
+    func addReview(_ review: Review) {
+        let reviewData: [String: Any] = [
+            "restaurantName": review.restaurantName,
+            "cuisine": review.cuisine,
+            "location": review.location,
+            "score": review.score,
+            "reviewText": review.reviewText,
+            "photoURL": review.photoURL
+        ]
+        
+        db.collection("Reviews").addDocument(data: reviewData) { error in
+            if let error = error {
+                print("Error adding review: \(error.localizedDescription)")
+            } else {
+                print("Review added successfully!")
+                // Optionally, dismiss or navigate away after a successful submission.
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
 }
