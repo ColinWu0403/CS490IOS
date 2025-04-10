@@ -1,3 +1,4 @@
+Deli
 ===
 
 ## Table of Contents
@@ -9,14 +10,14 @@
 
 ## Overview
 
-[App] is a food-ranking platform that helps users explore new dining options and document their experiences. It consolidates restaurant data from the user’s local area, allowing them to write reviews, upload photos, and rate their meals. The app offers a personalized experience, where users can revisit their reviews and discover highly rated options nearby, making it a go-to solution for food lovers seeking convenience and variety.
+Deli is a food-ranking platform that helps users explore new dining options and document their experiences. It consolidates restaurant data from the user’s local area, allowing them to write reviews, upload photos, and rate their meals. The app offers a personalized experience where users can revisit their reviews and discover highly rated options nearby, making it a go-to solution for food lovers seeking convenience and variety.
 
 
 ### Description
 
 The app is designed to simplify the dining experience by combining restaurant discovery and food review features in one place. Users can explore local restaurants near them and add their own reviews. By enabling users to upload photos and provide detailed feedback, the app creates a personal list of dining experiences that can be shared with others.
 
-Beyond discovery, the app functions as a personal food diary. Users can revisit their profiles to see past reviews and photos, helping them remember their favorite restaurants and meals. The app’s intuitive interface, combined with real-time location-based restaurant recommendations, ensures that users can quickly decide where to eat. Whether it’s for trying new cuisines or revisiting old favorites, this app makes dining out an enjoyable and organized experience.
+Beyond discovery, the app functions as a personal food diary. Users can revisit their profiles to see past reviews and photos, helping them remember their favorite restaurants and meals. The app’s intuitive interface, combined with real-time, location-based restaurant recommendations, ensures that users can quickly decide where to eat. Whether it’s for trying new cuisines or revisiting old favorites, this app makes dining out an enjoyable and organized experience.
 
 ### App Evaluation
 
@@ -31,7 +32,7 @@ Beyond discovery, the app functions as a personal food diary. Users can revisit 
 
 ### 1. User Stories (Required and Optional)
 
-**Required Must-have Stories**
+**Required Must-Have Stories**
 
 * Ability to view restaurants near them and write reviews for those restaurants.
 * Ability to add unreviewed restaurants to the app or to add reviews to restaurants they haven't been to before. 
@@ -44,15 +45,15 @@ Beyond discovery, the app functions as a personal food diary. Users can revisit 
 
 ### 2. Screen Archetypes
 
-- [ ] Stream
+- [x] Stream
 * User can log a review for a new restaurant.
 * User can look at restaurants near them that match their preferences.
 * User can scroll through their account and previous reviews or visited restaurants. 
 
-- [ ] Search
+- [x] Search
 * User can search for restaurants near them.
 
-- [ ] Detail
+- [x] Detail
 * User can look at a restaurant's details.
 * User can look at a review of a restaurant.
 * User can look at their account details (username, number of reviews, preferences, etc.)
@@ -75,8 +76,6 @@ Beyond discovery, the app functions as a personal food diary. Users can revisit 
     -> Detail page for individual restaurant with info and reviews
 - Add review
     -> Confirm review
-    
-
 
 ## Wireframes
 
@@ -87,18 +86,18 @@ Beyond discovery, the app functions as a personal food diary. Users can revisit 
 
 User
 - ID
-- Name
-- Photo
+- name
+- photo
 - Review[]
 
 Review
 - ID
-- Restaurant_name
-- Cuisine
-- Location
-- Score
-- Review Text
-- Photo
+- restaurantName
+- cuisine
+- location
+- score
+- reviewText
+- photoURL
 
 ### Models
 
