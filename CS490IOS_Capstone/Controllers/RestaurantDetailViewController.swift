@@ -7,23 +7,29 @@
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController {
+class RestaurantDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // Outlets
-
-    @IBOutlet weak var personalReview: UILabel!
     @IBOutlet weak var scoreLabel: UIStackView!
     @IBOutlet weak var cuisineLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var restaurantImageView: UIImageView!
+    @IBOutlet weak var reviewsCollectionView: UICollectionView!
     
     // Selected review from ListViewController
     var review: Review?
-      
+    var googleReviews: [GoogleReview] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        reviewsCollectionView.delegate = self
+        reviewsCollectionView.dataSource = self
+        setupDummyReviews()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 187, height: 187)
     }
     
     // Function to fill stars based on review - currently only handles integer value
@@ -44,21 +50,12 @@ class RestaurantDetailViewController: UIViewController {
     }
       
     func setupUI() {
-        // Clear all fields - may delete this
-        restaurantNameLabel.text = ""
-        cuisineLabel.text = ""
-        locationLabel.text = ""
-        personalReview.text = ""
-        restaurantImageView.image = UIImage(named: "placeholder")
-        updateStars(for: 0)
-          
         guard let review = review else { return }
           
         // Populate fields with review data
         restaurantNameLabel.text = review.restaurantName
         cuisineLabel.text = review.cuisine
         locationLabel.text = "X Miles Away" // TODO: Replace with real distance later
-        personalReview.text = review.reviewText // TODO: Replace with carousel of real reviews later
           
         updateStars(for: review.score)
           
@@ -73,5 +70,46 @@ class RestaurantDetailViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    
+    // UI COLLECTION VIEW FUNCS
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // current mock data
+        return googleReviews.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GoogleReviewCell", for: indexPath) as? GoogleReviewCell else {
+            fatalError("Could not dequeue GoogleReviewCell")
+        }
+        
+        let review = googleReviews[indexPath.item]
+        
+        // Populating cell fields
+        cell.authorNameLabel.text = review.authorName
+        cell.ratingLabel.text = String(format: "%.1f", review.rating)
+        cell.reviewTextLabel.text = review.text
+        
+        return cell
+    }
+    
+    // SET UP FOR MOCK GOOGLE REVIEWS
+    struct GoogleReview {
+        let authorName: String
+        let rating: Double
+        let text: String
+    }
+    
+    func setupDummyReviews() {
+        googleReviews = [
+            GoogleReview(authorName: "Aysu S.", rating: 4.5, text: "Amazing service and delicious food!."),
+            GoogleReview(authorName: "Asu S.", rating: 4.0, text: "Great atmosphere, good food, but a little pricey."),
+            GoogleReview(authorName: "Ays S.", rating: 5.0, text: "Absolutely loved it! Will definitely come back."),
+            GoogleReview(authorName: "Ysu S.", rating: 3.5, text: "Food was okay, service could be better."),
+            GoogleReview(authorName: "Ayu S.", rating: 4.8, text: "Best dining experience I’ve had in a while!")
+        ]
+        
+        reviewsCollectionView.reloadData()
     }
   }
