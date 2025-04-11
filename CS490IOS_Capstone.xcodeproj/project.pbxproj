@@ -42,6 +42,7 @@
 		3839012A2DA05D5A0099D447 /* Exceptions for "CS490IOS_Capstone" folder in "AppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Controllers/GoogleReviewCell.swift,
 				Controllers/RestaurantTableViewCell.swift,
 			);
 			target = 0D3C14AA2D971E6A00E40603 /* AppTests */;
