@@ -31,7 +31,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         reviewTableView.dataSource = self
                 
         fetchReviews()
-        // fetchGooglePlacesRestaurants()
+//         fetchGooglePlacesRestaurants()
     }
     
 
