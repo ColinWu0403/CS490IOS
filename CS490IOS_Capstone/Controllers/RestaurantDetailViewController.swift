@@ -103,13 +103,14 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDelegate
     
     func setupDummyReviews() {
         googleReviews = [
-            GoogleReview(authorName: "Aysu S.", rating: 4.5, text: "Amazing service and delicious food!."),
-            GoogleReview(authorName: "Asu S.", rating: 4.0, text: "Great atmosphere, good food, but a little pricey."),
-            GoogleReview(authorName: "Ays S.", rating: 5.0, text: "Absolutely loved it! Will definitely come back."),
-            GoogleReview(authorName: "Ysu S.", rating: 3.5, text: "Food was okay, service could be better."),
-            GoogleReview(authorName: "Ayu S.", rating: 4.8, text: "Best dining experience I’ve had in a while!")
+            GoogleReview(authorName: "Sarah M.", rating: 4.8, text: "The food was fantastic, and the staff was super friendly. Will be returning soon!"),
+            GoogleReview(authorName: "John D.", rating: 3.9, text: "Great food and good service, but the wait time was longer than expected."),
+            GoogleReview(authorName: "Emily W.", rating: 5.0, text: "Hands down, the best food I’ve ever had! Highly recommend the food."),
+            GoogleReview(authorName: "Mike T.", rating: 4.2, text: "Nice ambiance, but the pasta could use a little more flavor. Overall, a good experience."),
+            GoogleReview(authorName: "Jessica L.", rating: 4.6, text: "Love this place! The dessert menu is amazing, and the cocktails are delicious.")
         ]
         
         reviewsCollectionView.reloadData()
     }
+
   }
