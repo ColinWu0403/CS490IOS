@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 import FirebaseFirestore
 import FirebaseStorage
 
@@ -18,14 +19,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var reviews: [Review] = []
     
     let db = Firestore.firestore()
+    let placesService = GooglePlacesServices()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let key = AppConfig.shared.googlePlacesAPIKey
+        print("Google Places API Key: \(key)")
 
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
                 
         fetchReviews()
+        // fetchGooglePlacesRestaurants()
     }
     
 
@@ -50,6 +56,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } catch {
                     print("Error decoding document: \(error)")
                 }
+            }
+        }
+    }
+    
+    func fetchGooglePlacesRestaurants() {
+        let location = CLLocationCoordinate2D(latitude: 40.4237, longitude: -86.9212) // Example: West Lafayette
+
+        placesService.fetchNearbyRestaurantsAsReviews(location: location) { fetchedReviews in
+            DispatchQueue.main.async {
+                self.reviews = fetchedReviews
+                self.reviewTableView.reloadData()
             }
         }
     }

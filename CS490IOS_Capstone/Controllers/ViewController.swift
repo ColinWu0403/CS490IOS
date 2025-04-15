@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         printReviews()
         print("Aasjkafjhgakhgklsadhgkjadj aljkgsghakgklafdkgkjads")
         super.viewDidLoad()
+        seedReviewsFromSampleData()
         
 
         
@@ -77,6 +78,35 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    func seedReviewsFromSampleData() {
+        let db = Firestore.firestore()
+        
+        for restaurant in Restaurant.sampleData {
+            let review = Review(
+                restaurantName: restaurant.name,
+                cuisine: restaurant.cuisine ?? "Unknown",
+                location: restaurant.location,
+                score: Double.random(in: 3.5...5.0),
+                reviewText: "Great experience at \(restaurant.name)!",
+                photoURL: "https://en.wikipedia.org/wiki/File:Image_created_with_a_mobile_phone.png" // placeholder image
+            )
+            
+            let reviewData: [String: Any] = [
+                "restaurantName": review.restaurantName,
+                "cuisine": review.cuisine,
+                "location": review.location,
+                "score": review.score,
+                "reviewText": review.reviewText,
+                "photoURL": review.photoURL
+            ]
+            
+            db.collection("Reviews").addDocument(data: reviewData)
+        }
+
+        print("🔥 Sample reviews seeded to Firestore")
+    }
+
 
 }
 

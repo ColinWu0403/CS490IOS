@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseStorage
 
-class AddReviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddReviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var resultsTableView: UITableView!
     @IBOutlet weak var restaurantSearchBar: UISearchBar!
@@ -17,6 +17,9 @@ class AddReviewViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let db = Firestore.firestore()
     var restaurantResults: [Restaurant] = []
+    var filteredRestaurants: [Restaurant] = []
+    var isFiltering: Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,9 @@ class AddReviewViewController: UIViewController, UITableViewDelegate, UITableVie
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
         
+        restaurantSearchBar.delegate = self
+        locationSearchBar.delegate = self
+        
         // Row height dimension
         resultsTableView.rowHeight = 70
         
@@ -51,7 +57,7 @@ class AddReviewViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantResults.count
+        return isFiltering ? filteredRestaurants.count : restaurantResults.count
     }
     
     @objc(tableView:cellForRowAtIndexPath:) internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,7 +65,8 @@ class AddReviewViewController: UIViewController, UITableViewDelegate, UITableVie
             fatalError("ERROR")
         }
         
-        let restaurant = restaurantResults[indexPath.row]
+        let restaurant = isFiltering ? filteredRestaurants[indexPath.row] : restaurantResults[indexPath.row]
+
         cell.nameLabel.text = restaurant.name
         cell.locationLabel.text = restaurant.location
         
@@ -75,9 +82,38 @@ class AddReviewViewController: UIViewController, UITableViewDelegate, UITableVie
             if let destinationVC = segue.destination as? WriteReviewController,
                let button = sender as? UIButton {
                 // Previously assigned tag to ID restaurant
-                let selectedRestaurant = restaurantResults[button.tag]
+                let selectedRestaurant = isFiltering ? filteredRestaurants[button.tag] : restaurantResults[button.tag]
                 destinationVC.restaurant = selectedRestaurant
             }
         }
     }
+    
+    func filterRestaurants() {
+        let nameQuery = restaurantSearchBar.text?.lowercased() ?? ""
+        let locationQuery = locationSearchBar.text?.lowercased() ?? ""
+        
+        if nameQuery.isEmpty && locationQuery.isEmpty {
+            isFiltering = false
+            filteredRestaurants = []
+        } else {
+            isFiltering = true
+            filteredRestaurants = Restaurant.sampleData.filter { restaurant in
+                let matchesName = restaurant.name.lowercased().contains(nameQuery)
+                let matchesLocation = restaurant.location.lowercased().contains(locationQuery)
+                return matchesName || matchesLocation
+            }
+        }
+        
+        resultsTableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterRestaurants()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+
+
 }
